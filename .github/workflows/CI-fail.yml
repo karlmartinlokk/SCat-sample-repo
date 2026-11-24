@@ -1,0 +1,14 @@
+name: CI fail demo
+on:
+  workflow_dispatch: 
+    inputs:
+      outcome:
+        type: choice
+        options: [failure, success]
+        default: failure
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit ${{ inputs.outcome == 'success' && '0' || '1' }}
